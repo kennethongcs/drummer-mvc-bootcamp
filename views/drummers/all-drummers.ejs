@@ -4,15 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>List of Drummers</title>
   </head>
   <body>
     <% drummers.forEach(drummer => { %>
-    <p>
-      <a href="/drummer/<%= drummer.id %>"><%= drummer.id %></a>
-      <br />
-      <%= drummer.name %>
-    </p>
+    <p><%= drummer.id %>: <%=drummer.name%></p>
+    <a href="/drummer/<%=drummer.id%>">Make a Reservation</a>
+    <br />
+    <a href="/reservations/<%= drummer.id %> ">Check Current Reservations</a>
+    <br />
+    <a href="/items/<%= drummer.id %>">Check Current Equipments</a>
     <% }) %>
   </body>
 </html>

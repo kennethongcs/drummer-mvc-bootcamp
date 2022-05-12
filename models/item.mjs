@@ -1,30 +1,38 @@
-export default function initReservationModel(sequelize, DataTypes) {
+export default function initEquipmentModel(sequelize, DataTypes) {
   return sequelize.define(
-    'reservation',
+    // BUG here because equipment does not become plural
+    'item',
     {
       id: {
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        allowNull: false,
         type: DataTypes.INTEGER,
-      },
-      booking_date: {
-        type: DataTypes.DATE,
       },
       drummer_id: {
         type: DataTypes.INTEGER,
+        references: {
+          model: 'drummers',
+          key: 'id',
+        },
       },
-      createdAt: {
+      name: {
+        type: DataTypes.TEXT,
+      },
+      created_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: DataTypes.DATE,
       },
     },
     {
       underscored: true,
+    },
+    {
+      tableName: 'equipments',
     }
   );
 }
