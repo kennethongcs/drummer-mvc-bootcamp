@@ -1,6 +1,5 @@
 export default function initEquipmentModel(sequelize, DataTypes) {
   return sequelize.define(
-    // BUG here because equipment does not become plural
     'item',
     {
       id: {
