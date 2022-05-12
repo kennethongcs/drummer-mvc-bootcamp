@@ -1,6 +1,6 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('equipments', {
+    await queryInterface.createTable('items', {
       id: {
         autoIncrement: true,
         primaryKey: true,
