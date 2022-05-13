@@ -4,6 +4,7 @@ import allConfig from '../config/config.js';
 import initEquipmentModel from './item.mjs';
 import initDrummerModel from './drummer.mjs';
 import initReservationModel from './reservation.mjs';
+import initUserModel from './user.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -22,6 +23,7 @@ const sequelize = new Sequelize(
 db.Drummer = initDrummerModel(sequelize, Sequelize.DataTypes);
 db.Reservation = initReservationModel(sequelize, Sequelize.DataTypes);
 db.Equipment = initEquipmentModel(sequelize, Sequelize.DataTypes);
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
 
 db.Reservation.belongsTo(db.Drummer);
 db.Drummer.hasMany(db.Reservation);

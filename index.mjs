@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser';
 import methodOverride from 'method-override';
 
 import bindRoutes from './routes.mjs';
+import { getHashSalted } from './helper_functions.mjs';
 
 // Initialise Express instance
 const app = express();

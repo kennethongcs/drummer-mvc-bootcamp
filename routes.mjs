@@ -1,9 +1,11 @@
 import db from './models/index.mjs';
+import { getHashSalted } from './helper_functions.mjs';
 
 // import your controllers here
 import initDrummersController from './controllers/drummers.mjs';
 import initReservationsController from './controllers/reservations.mjs';
 import initEquipmentsController from './controllers/items.mjs';
+import initUsersController from './controllers/users.mjs';
 
 export default function bindRoutes(app) {
   // initialize the controller functions here
@@ -13,6 +15,23 @@ export default function bindRoutes(app) {
   const DrummersController = initDrummersController(db);
   const ReservationsController = initReservationsController(db);
   const EquipmentsController = initEquipmentsController(db);
+  const UsersController = initUsersController(db);
+
+  // check if user is logged in when creating a reservation
+  app.use(UsersController.userDetails);
+  // add user to global
+  app.use((req, res, next) => {
+    app.locals.user = req.user;
+    next();
+  });
+
+  // login
+  app.get('/login', UsersController.userLoginDisplay);
+  app.post('/login', UsersController.userLoginVerification);
+  app.get('/signup', UsersController.userRegister);
+  app.post('/signup', UsersController.userCreatePost);
+  // logout
+  app.get('/logout', UsersController.userLogout);
 
   // gets details of 1 drummer
   app.get('/drummer/:id', DrummersController.oneDrummer);
